@@ -7,7 +7,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aiglesiaspubill.listasandroid.databinding.MainItemBinding
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
+interface MainAdapterCallback {
+    fun onItemClicked(item: String)
+}
+
+class MainAdapter(var callback: MainAdapterCallback) : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
 
     private var items = listOf<String>()
 
@@ -25,6 +29,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
             binding.tvAge.text = "$position"
             binding.root.setOnClickListener{
                 Toast.makeText(binding.root.context, item, Toast.LENGTH_LONG).show()
+                callback.onItemClicked(item)
             }
         }
     }

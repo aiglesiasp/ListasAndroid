@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiglesiaspubill.listasandroid.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , MainAdapterCallback{
 
     private lateinit var binding: ActivityMainBinding
-    private val adapter = MainAdapter()
+    private val adapter = MainAdapter(this)
 
     private val list = MutableList<String>(40) {
         "Soy el elemento $it"
@@ -36,5 +36,13 @@ class MainActivity : AppCompatActivity() {
         adapter.updateList(list)
         binding.recyckerViewItems.adapter = adapter
         binding.recyckerViewItems.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun updateTitle(title: String) {
+        binding.textView.text = title
+    }
+
+    override fun onItemClicked(item: String) {
+        updateTitle(item)
     }
 }
