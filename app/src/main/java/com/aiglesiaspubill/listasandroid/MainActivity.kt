@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val adapter = MainAdapter()
 
-    private val list = List<String>(40) {
+    private val list = MutableList<String>(40) {
         "Soy el elemento $it"
     }
 
@@ -21,7 +21,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         createRecycler()
+        setListeners()
 
+    }
+
+    private fun setListeners() {
+        binding.btnAdd.setOnClickListener {
+            list.add("Soy el elemento ${list.size}")
+            adapter.updateList(list)
+        }
     }
 
     private fun createRecycler() {

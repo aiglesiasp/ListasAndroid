@@ -3,6 +3,7 @@ package com.aiglesiaspubill.listasandroid
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aiglesiaspubill.listasandroid.databinding.MainItemBinding
 
@@ -22,6 +23,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
             }
             binding.tvName.text = item
             binding.tvAge.text = "$position"
+            binding.root.setOnClickListener{
+                Toast.makeText(binding.root.context, item, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
