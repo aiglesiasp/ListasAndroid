@@ -8,6 +8,11 @@ import com.aiglesiaspubill.listasandroid.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val adapter = MainAdapter()
+
+    private val list = List<String>(40) {
+        "Soy el elemento $it"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +25,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createRecycler() {
-        binding.recyckerViewItems.adapter = MainAdapter()
+        adapter.updateList(list)
+        binding.recyckerViewItems.adapter = adapter
         binding.recyckerViewItems.layoutManager = LinearLayoutManager(this)
     }
 }

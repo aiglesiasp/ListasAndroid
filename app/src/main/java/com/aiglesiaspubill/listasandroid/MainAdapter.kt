@@ -8,8 +8,10 @@ import com.aiglesiaspubill.listasandroid.databinding.MainItemBinding
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
 
+    private var items = listOf<String>()
+
     inner class MainviewHolder(val binding: MainItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int) {
+        fun bind(item: String, position: Int) {
             if (position % 2 == 0) {
                 binding.tvName.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                 binding.tvAge.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
@@ -18,14 +20,14 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
                 binding.tvAge.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
 
             }
-            binding.tvName.text = "Name $position"
+            binding.tvName.text = item
             binding.tvAge.text = "$position"
         }
     }
 
     //TAMAÑO DE NUESTRO ADAPTER. EL NUMERO
     override fun getItemCount(): Int {
-        return 40
+        return items.size
     }
 
     //CREAMOS EL HOLDER QUE QUEREMOS
@@ -35,7 +37,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainviewHolder>() {
 
     //PASAMOS ESOS HOLDERS
     override fun onBindViewHolder(holder: MainviewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(items[position], position)
+    }
+
+    fun updateList(list: List<String>) {
+        items = list
+        notifyDataSetChanged()
     }
 
 
