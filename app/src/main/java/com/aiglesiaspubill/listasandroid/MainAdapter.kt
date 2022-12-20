@@ -36,7 +36,7 @@ class MainAdapter(var callback: MainAdapterCallback) : RecyclerView.Adapter<Main
 
     //TAMAÑO DE NUESTRO ADAPTER. EL NUMERO
     override fun getItemCount(): Int {
-        return items.size
+        return items.size + 1
     }
 
     //CREAMOS EL HOLDER QUE QUEREMOS
@@ -46,7 +46,11 @@ class MainAdapter(var callback: MainAdapterCallback) : RecyclerView.Adapter<Main
 
     //PASAMOS ESOS HOLDERS
     override fun onBindViewHolder(holder: MainviewHolder, position: Int) {
-        holder.bind(items[position], position)
+        if(position >= items.size) {
+            holder.bind("Soy el ultimo y no estoy en la lista", position)
+        } else {
+            holder.bind(items[position], position)
+        }
     }
 
     fun updateList(list: List<String>) {
